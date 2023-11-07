@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const cors = require("cors");
 const PORT = 3000;
 
 app.use(cors());
+
+app.use("/", express.static(path.join(__dirname, "/public")));
 
 app.use("/", require("./routes/root"));
 
@@ -12,7 +15,7 @@ app.all("*", (req, res) => {
   //"*" or 'request all' won't return 404 since the route now exists so this returns a custom 404
   res.status(404);
   if (req.accepts("html")) {
-    res.send("No page exists  R ERR");
+    res.sendFile(path.join(__dirname, "views", "404.html"));
   } else if (req.accepts("json")) {
     res.json({ error: "404 Not Found R ERR" });
   } else {
