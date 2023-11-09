@@ -2,13 +2,20 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
-const PORT = 3000;
+const PORT = 3500;
 
 app.use(cors());
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use(express.json());
 
 app.use("/", express.static(path.join(__dirname, "/public")));
 
 app.use("/", require("./routes/root"));
+app.use("/register", require("./routes/register"));
+app.use("/auth", require("./routes/auth"));
+app.use("/users", require("./routes/api/users"));
 
 //Response for a url that doesn't exist
 app.all("*", (req, res) => {
@@ -23,4 +30,4 @@ app.all("*", (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Listening on port ${3000}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

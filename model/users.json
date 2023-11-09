@@ -1,0 +1,12 @@
+[
+  { "id": 1, "firstname": "Nora", "lastname": "Casson" },
+  { "id": 2, "firstname": "Flynn", "lastname": "Dales" },
+  {
+    "username": "Leela",
+    "password": "$2b$10$/asPy.euy77TyRDcLIg1M.M7lByY.eIt/SIJvpLfRWyrpsVD.Lvuy"
+  },
+  {
+    "username": "Rob",
+    "password": "$2b$10$DHf3Nlnc/YjoAv4UFfLVIO42AphkI8s4tpMkBPiJiIsezl7MLO5ea"
+  }
+]
