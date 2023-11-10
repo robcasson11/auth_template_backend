@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const verifyJWT = require("./middleware/verifyJWT");
+const cookieParser = require("cookie-parser");
 const PORT = 3500;
 
 app.use(cors());
@@ -10,11 +12,17 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
+app.use(cookieParser({ secure: true }));
+
 app.use("/", express.static(path.join(__dirname, "/public")));
 
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+
+//Everything after this line will need verify/access tokens
+app.use(verifyJWT);
 app.use("/users", require("./routes/api/users"));
 
 //Response for a url that doesn't exist
