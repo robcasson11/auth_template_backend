@@ -1,2 +1,4 @@
 node_modules
 to-do.md
+coverage
+.env

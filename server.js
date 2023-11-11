@@ -2,24 +2,34 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
 const verifyJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
+const credentials = require("./middleware/credentials");
 const PORT = 3500;
 
-app.use(cors());
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
 
+// Cross Origin Resource Sharing -- note corsOptions is passed in as arg
+app.use(cors(corsOptions));
+
+//Handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
 
+//Handle JSON
 app.use(express.json());
 
 app.use(cookieParser({ secure: true }));
 
 app.use("/", express.static(path.join(__dirname, "/public")));
 
-app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
 app.use("/refresh", require("./routes/refresh"));
+app.use("/logout", require("./routes/logout"));
+app.use("/", require("./routes/root"));
 
 //Everything after this line will need verify/access tokens
 app.use(verifyJWT);

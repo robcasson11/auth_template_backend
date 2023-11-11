@@ -1,1 +1,12 @@
-[{"id":1,"firstname":"Nora","lastname":"Casson"},{"id":2,"firstname":"Flynn","lastname":"Dales"},{"username":"Rob","password":"$2b$10$DHf3Nlnc/YjoAv4UFfLVIO42AphkI8s4tpMkBPiJiIsezl7MLO5ea"},{"username":"Leela","password":"$2b$10$/asPy.euy77TyRDcLIg1M.M7lByY.eIt/SIJvpLfRWyrpsVD.Lvuy","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxlZWxhIiwiaWF0IjoxNjk5NjQ4MjkxLCJleHAiOjE2OTk3MzQ2OTF9.3vT5-ezKLIGBJi0d5vUPQugU2KLfCGL91_aQflbuIV4"}]
+[
+  {
+    "username": "Leela",
+    "password": "$2b$10$/asPy.euy77TyRDcLIg1M.M7lByY.eIt/SIJvpLfRWyrpsVD.Lvuy",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxlZWxhIiwiaWF0IjoxNjk5Njk0OTgxLCJleHAiOjE2OTk3ODEzODF9.Pjp5nA5tL_UYMfg7FllGKHmupoTBOVrozPNdYryU4so"
+  },
+  {
+    "username": "Rob",
+    "password": "$2b$10$rcQ4YAFfwd4Ms8N4kNCdbublz4BoB4WHIIPIAudSx5TMYTEDGxDi.",
+    "refreshToken": ""
+  }
+]
