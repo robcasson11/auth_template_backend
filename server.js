@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -6,7 +7,12 @@ const corsOptions = require("./config/corsOptions");
 const verifyJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
 const credentials = require("./middleware/credentials");
+const mongoose = require("mongoose");
+const connectDB = require("./config/dbConn");
 const PORT = 3500;
+
+//Connect to the database
+connectDB();
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
@@ -48,4 +54,7 @@ app.all("*", (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+mongoose.connection.once("open", () => {
+  console.log("connected to mongoDB");
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+});
