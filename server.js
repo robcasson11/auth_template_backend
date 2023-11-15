@@ -31,15 +31,15 @@ app.use(cookieParser({ secure: true }));
 
 app.use("/", express.static(path.join(__dirname, "/public")));
 
-app.use("/register", require("./routes/API/register"));
 app.use("/auth", require("./routes/Auth/auth"));
 app.use("/refresh", require("./routes/Auth/refresh"));
 app.use("/logout", require("./routes/Auth/logout"));
-app.use("/update", require("./routes/API/update"));
 app.use("/", require("./routes/Views Routes/root"));
 
 //Everything after this line will need verify/access tokens
-// app.use(verifyJWT);
+app.use(verifyJWT);
+
+app.use("/user", require("./routes/API/user"));
 
 //Response for a url that doesn't exist
 app.all("*", (req, res) => {
