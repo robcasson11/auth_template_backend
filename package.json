@@ -1,5 +1,5 @@
 {
-  "name": "auth_template",
+  "name": "auth_template_backend",
   "version": "1.0.0",
   "description": "Authorisation and authenticate template ",
   "main": "server.js",

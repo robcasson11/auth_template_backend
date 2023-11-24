@@ -38,11 +38,11 @@ const handleLogin = async (req, res) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      //add back before deploy, this setting prevents the httpOnly cookie being sent by thunderclient
-      //   secure: true,
+      //remove (secure: true) during testing with thunderclient/ during developement
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.json({ accessToken });
+    res.json({ roles, accessToken });
   } else {
     res.sendStatus(401);
   }
