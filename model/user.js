@@ -12,6 +12,7 @@ const userSchema = new Schema({
       default: 1,
     },
     admin: Number,
+    portfolio_viewer: Number,
   },
   password: {
     type: String,
