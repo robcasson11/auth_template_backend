@@ -11,20 +11,14 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 const PORT = 3500;
 
-//Connect to the database
 connectDB();
 
-// Handle options credentials check - before CORS!
-// and fetch cookies credentials requirement
 app.use(credentials);
 
-// Cross Origin Resource Sharing -- note corsOptions is passed in as arg
 app.use(cors(corsOptions));
 
-//Handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
 
-//Handle JSON
 app.use(express.json());
 
 app.use(cookieParser({ secure: true }));
@@ -36,14 +30,11 @@ app.use("/refresh", require("./routes/Auth/refresh"));
 app.use("/logout", require("./routes/Auth/logout"));
 app.use("/", require("./routes/Views Routes/root"));
 
-//Everything after this line will need verify/access tokens
 app.use(verifyJWT);
 
 app.use("/user", require("./routes/API/user"));
 
-//Response for a url that doesn't exist
 app.all("*", (req, res) => {
-  //"*" or 'request all' won't return 404 since the route now exists so this returns a custom 404
   res.status(404);
   if (req.accepts("html")) {
     res.sendFile(path.join(__dirname, "views", "404.html"));
@@ -55,6 +46,5 @@ app.all("*", (req, res) => {
 });
 
 mongoose.connection.once("open", () => {
-  console.log("connected to mongoDB");
-  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+  app.listen(PORT);
 });

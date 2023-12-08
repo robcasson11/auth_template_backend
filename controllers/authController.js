@@ -10,12 +10,10 @@ const handleLogin = async (req, res) => {
       .json({ message: "Username and Password are required" });
   }
   const foundUser = await User.findOne({ username: user }).exec();
-  if (!foundUser) return res.sendStatus(401); //Unauthorized
-  // evaluate password
+  if (!foundUser) return res.sendStatus(401);
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
     const roles = Object.values(foundUser.roles).filter(Boolean);
-    // create JWTs
     const accessToken = jwt.sign(
       {
         UserInfo: {
@@ -24,21 +22,18 @@ const handleLogin = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "30s" }
+      { expiresIn: "30m" }
     );
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
     );
-    // Saving refreshToken with current user
     foundUser.refreshToken = refreshToken;
     const result = await foundUser.save();
-    // console.log("authController user authorized: ", result);
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      //remove (secure: true) during testing with thunderclient/ during developement
       secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
